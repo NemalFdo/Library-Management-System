@@ -1,5 +1,6 @@
 "use client"; // Mark this as a client-side component
 import React from "react";
+import Image from "next/image";
 import { usePathname } from "next/navigation"; // Use usePathname from next/navigation
 
 const SideNav = () => {
@@ -18,9 +19,11 @@ const SideNav = () => {
     <div className="h-screen w-64 bg-black text-white flex flex-col items-center py-6">
       {/* Profile Section */}
       <div className="flex flex-col items-center mb-8">
-        <img
+        <Image
           src="/Choose Image.png"
           alt="Admin Avatar"
+          width={80}
+          height={80}
           className="w-20 h-20 rounded-full mb-3"
         />
         <h3 className="text-lg font-semibold">Admin</h3>

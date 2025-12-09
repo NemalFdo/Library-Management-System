@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import Container from "@/components/layout/container";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
@@ -15,12 +17,12 @@ export default function Signup() {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
-  const handleChange = (e:any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e:any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
@@ -47,7 +49,7 @@ export default function Signup() {
       } else {
         setErrorMessage(data.message || "Error registering");
       }
-    } catch (err) {
+    } catch {
       setErrorMessage("An error occurred. Please try again.");
     }
   };
@@ -59,7 +61,7 @@ export default function Signup() {
           <div className="absolute bottom-0 right-0 mb-12">
             <h1 className="text-4xl font-semibold text-black mb-4">Sign Up to</h1>
             <h2 className="text-6xl font-bold text-[#A7A3FF]">BOOK NEST</h2>
-            <img src="library.png" width={950} height={500} alt="Library" />
+            <Image src="/library.png" width={950} height={500} alt="Library" />
           </div>
         </div>
         <div className="flex flex-col justify-center items-center w-2/5 bg-white">
@@ -119,9 +121,9 @@ export default function Signup() {
             </form>
             <p className="mt-4 text-gray-600 text-sm text-center">
               Already have an account?{" "}
-              <a href="/" className="text-purple-600 hover:underline">
+              <Link href="/" className="text-purple-600 hover:underline">
                 Sign In here!
-              </a>
+              </Link>
             </p>
           </div>
         </div>

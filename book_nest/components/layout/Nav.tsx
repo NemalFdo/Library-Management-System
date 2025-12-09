@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import axios from "axios";
 import debounce from "lodash.debounce";
 
@@ -12,23 +13,12 @@ interface Book {
 }
 
 const LoginNavbar = () => {
-  const [books, setBooks] = useState<Book[]>([]);
   const [profileImage, setProfileImage] = useState<string>("/default.png");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [searchResults, setSearchResults] = useState<Book[]>([]);
   const [showResults, setShowResults] = useState<boolean>(false);
 
   useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        const response = await axios.get(`${API_URL}/api/books`);
-        setBooks(response.data);
-      } catch (error) {
-        console.error("Error fetching books:", error);
-      }
-    };
-    fetchBooks();
-
     const storedUserData = localStorage.getItem("globalUserData");
     if (storedUserData) {
       const { profileImage: savedImage } = JSON.parse(storedUserData);
@@ -64,7 +54,7 @@ const LoginNavbar = () => {
 
   const addToCart = (book: Book) => {
     const storedCart = localStorage.getItem("cart");
-    let cart = storedCart ? JSON.parse(storedCart) : [];
+    const cart = storedCart ? JSON.parse(storedCart) : [];
     cart.push(book);
     localStorage.setItem("cart", JSON.stringify(cart));
     setShowResults(false);
@@ -96,15 +86,17 @@ const LoginNavbar = () => {
               <div className="absolute top-12 left-0 w-full bg-white shadow-md z-50 rounded-md">
                 {searchResults.length > 0 ? (
                   <ul className="divide-y divide-gray-200">
-                    {searchResults.map((book: any, index: number) => (
+                    {searchResults.map((book: Book, index: number) => (
                       <li
                         key={book.id || index}
                         className="px-4 py-2 cursor-pointer hover:bg-gray-100"
                       >
                         <div className="flex items-center">
-                          <img
+                          <Image
                             src={`${API_URL}${book.image}`}
                             alt={book.name}
+                            width={40}
+                            height={40}
                             className="w-10 h-10 object-cover rounded-md mr-4"
                           />
                           <div>
@@ -128,9 +120,11 @@ const LoginNavbar = () => {
             )}
           </div>
           <div className="flex items-center space-x-4 text-[15px] text-[#666666]">
-            <img
+            <Image
               src={profileImage || "/default.png"}
               alt="Profile"
+              width={40}
+              height={40}
               className="w-10 h-10 rounded-full object-cover mr-2 cursor-pointer"
               onClick={() => (window.location.href = "/userprofile")}
             />

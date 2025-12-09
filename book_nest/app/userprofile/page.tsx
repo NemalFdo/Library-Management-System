@@ -173,9 +173,11 @@ const AccountSettings = () => {
                 </div>
               </div>
               <div className="text-center">
-                <img
+                <Image
                   src={userData.profileImage || "/default.png"}
                   alt="Profile"
+                  width={160}
+                  height={160}
                   className="w-40 h-40 rounded-full object-cover ml-12 mr-12 mb-3 border-2 border-gray-300"
                 />
                 <label
