@@ -13,7 +13,9 @@ const storage = multer.diskStorage({
     cb(null, "uploads/"); // Save images in the 'uploads' folder
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
+    // Replace spaces and special characters in filename
+    const sanitizedFilename = file.originalname.replace(/\s+/g, '-').replace(/[()]/g, '');
+    cb(null, `${Date.now()}-${sanitizedFilename}`);
   },
 });
 

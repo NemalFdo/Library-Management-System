@@ -7,6 +7,10 @@ const WebSocket = require("ws");
 
 dotenv.config();
 
+// Debug: Check if JWT_SECRET is loaded
+console.log("JWT_SECRET loaded:", process.env.JWT_SECRET ? "YES" : "NO");
+console.log("JWT_SECRET value:", process.env.JWT_SECRET);
+
 const app = express();
 
 // Middleware
