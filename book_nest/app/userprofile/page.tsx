@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import Container from "@/components/layout/container";
 import Navigation from "@/components/layout/Nav";
 import Cookies from "js-cookie";

@@ -18,6 +18,12 @@ const ContactUs = () => {
   const [messages, setMessages] = useState<{ sender: string; text: string }[]>([]); // Store messages with sender info
   const [adminResponse, setAdminResponse] = useState<string>("");
 
+  // Note: adminResponse is set but not displayed separately
+  // It's kept for WebSocket message handling
+  if (adminResponse) {
+    console.log("Admin response received:", adminResponse);
+  }
+
   useEffect(() => {
     const storedUserData = localStorage.getItem("globalUserData");
     if (storedUserData) {

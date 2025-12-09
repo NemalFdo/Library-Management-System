@@ -1,8 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Navigation from "@/components/layout/Nav";
-import Footer from "@/components/layout/footer";
 import Container from "@/components/layout/container";
+import Footer from "@/components/layout/footer";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
@@ -111,9 +112,11 @@ export default function Cart() {
                   key={index}
                   className="flex items-center justify-between mb-4 border-b pb-4"
                 >
-                  <img
+                  <Image
                     src={item.image.startsWith("http") ? item.image : `${API_URL}${item.image}`}
                     alt={item.name}
+                    width={80}
+                    height={120}
                     className="w-20 h-30 object-contain"
                   />
                   <div className="flex-1 ml-4">

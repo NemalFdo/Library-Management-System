@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import Container from "@/components/layout/container";
 import Navigation from "@/components/layout/Nav";
 import Footer from "@/components/layout/footer";
@@ -34,9 +35,11 @@ const Categories = () => {
                 key={index}
                 className="flex flex-col items-center space-y-4 p-6 bg-white shadow-2xl rounded-lg hover:scale-105 hover:shadow-2xl transition-transform duration-300 ease-in-out"
               >
-                <img
+                <Image
                   src={category.img}
                   alt={category.title}
+                  width={160}
+                  height={192}
                   className="w-40 h-48 object-cover rounded-lg border-2 border-gray-300 transition-transform duration-300 ease-in-out transform hover:scale-105"
                 />
                 <span className="text-gray-800 font-semibold text-lg text-center transition-colors duration-300 hover:text-indigo-600">

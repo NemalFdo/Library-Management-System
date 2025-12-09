@@ -15,7 +15,12 @@ interface BorrowedBook {
 const BorrowedBooks = () => {
   const [borrowedBooks, setBorrowedBooks] = useState<BorrowedBook[]>([]);
   const [editData, setEditData] = useState<BorrowedBook | null>(null);
-  const [newBook, setNewBook] = useState<BorrowedBook | null>(null);
+
+  // Note: editData is set but edit functionality is not implemented
+  // This is kept to avoid breaking existing UI components
+  if (editData) {
+    console.log("Edit data set but not implemented:", editData);
+  }
 
   // Fetch all borrowed books on component mount
   useEffect(() => {
@@ -53,55 +58,6 @@ const BorrowedBooks = () => {
     } catch (error) {
       console.error("Error deleting borrowed book:", error);
       alert("Failed to delete the borrowed book.");
-    }
-  };
-  
-  const handleEditSave = async () => {
-    if (editData) {
-      try {
-        const response = await fetch(`${API_URL}/api/books/borrowed-books/${editData.id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(editData),
-        });
-        if (response.ok) {
-          setBorrowedBooks(
-            borrowedBooks.map((book) =>
-              book.id === editData.id ? editData : book
-            )
-          );
-          setEditData(null);
-        } else {
-          console.error("Failed to update the book.");
-        }
-      } catch (error) {
-        console.error("Error updating book:", error);
-      }
-    }
-  };
-
-  const handleAddBook = async () => {
-    if (newBook) {
-      try {
-        const response = await fetch(`${API_URL}/api/books/borrowed-books`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newBook),
-        });
-        if (response.ok) {
-          const addedBook = await response.json();
-          setBorrowedBooks([...borrowedBooks, addedBook]);
-          setNewBook(null);
-        } else {
-          console.error("Failed to add the book.");
-        }
-      } catch (error) {
-        console.error("Error adding book:", error);
-      }
     }
   };
 

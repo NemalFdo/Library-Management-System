@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import SideNav from '@/components/layout/AdminNav';
 import Modal from '@/components/layout/Modal';
 import axios, { AxiosResponse } from 'axios';
@@ -170,9 +171,11 @@ const BooksPage: React.FC = () => {
                   <td className="py-3 px-4">{book.isbn}</td>
                   <td className="py-3 px-4">{book.description}</td>
                   <td className="py-3 px-4">
-                    <img
+                    <Image
                       src={`${API_URL}${book.image}`}
                       alt={book.name}
+                      width={64}
+                      height={64}
                       className="h-16 w-16 object-cover"
                     />
                   </td>

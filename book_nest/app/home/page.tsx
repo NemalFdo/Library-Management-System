@@ -2,6 +2,7 @@
 import Navigation from "@/components/layout/Nav";
 import Container from "@/components/layout/container";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Footer from "@/components/layout/footer";
 import axios from "axios";
 
@@ -18,7 +19,6 @@ export default function Home() {
   const [books, setBooks] = useState<Book[]>([]);  // State to store fetched books
   const [topSellersIndex, setTopSellersIndex] = useState(0);
   const [recommendedIndex, setRecommendedIndex] = useState(0);
-  const [selectedBook, setSelectedBook] = useState<Book | null>(null);
 
   // Fetch books from API
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function Home() {
   const addToCart = (book: Book) => {
     // Get the current cart from localStorage
     const storedCart = localStorage.getItem("cart");
-    let cart = storedCart ? JSON.parse(storedCart) : [];
+    const cart = storedCart ? JSON.parse(storedCart) : [];
 
     // Add the new book to the cart
     cart.push(book);
@@ -85,9 +85,9 @@ export default function Home() {
               New Releases This Week
             </h1>
             <p className="text-gray-600 leading-relaxed">
-              It's time to update your reading list with some of the latest and
+              It&apos;s time to update your reading list with some of the latest and
               greatest releases in the literary world. From heart-pumping
-              thrillers to captivating memoirs, this week's new releases offer
+              thrillers to captivating memoirs, this week&apos;s new releases offer
               something for everyone.
             </p>
           </div>
@@ -146,7 +146,7 @@ export default function Home() {
             <div
               className="flex transition-transform duration-500 ease-in-out"
               style={{
-                transform: `translateX(-${(topSellersIndex % books.length) * 33.333}%)`,
+                transform: `translateX(-${topSellersIndex * 33.333}%)`,
               }}
             >
               {books.map((item, index) => (
@@ -156,9 +156,11 @@ export default function Home() {
                   style={{ flex: "0 0 33.333%" }}
                 >
                   <div className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md h-full border border-gray-300">
-                    <img
+                    <Image
                       src={`${API_URL}${item.image}`}
                       alt={item.name}
+                      width={160}
+                      height={160}
                       className="w-full object-contain h-40 rounded-md mb-4"
                     />
                     <h3 className="text-sm font-bold text-gray-900 mb-2 text-center">
@@ -238,9 +240,11 @@ export default function Home() {
                   style={{ flex: "0 0 33.333%" }}
                 >
                   <div className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md h-full border border-gray-300">
-                    <img
+                    <Image
                       src={`${API_URL}${item.image}`}
                       alt={item.name}
+                      width={160}
+                      height={160}
                       className="w-full object-contain h-40 rounded-md mb-4"
                     />
                     <h3 className="text-sm font-bold text-gray-900 mb-2 text-center">
@@ -291,9 +295,11 @@ export default function Home() {
             {/* News Item 1 */}
             <div className="flex items-start space-x-4">
               {/* Image */}
-              <img
+              <Image
                 src="/Photo news.png"
                 alt="The Books You Need to Read in 2023"
+                width={80}
+                height={112}
                 className="w-20 h-28 object-cover rounded-md flex-shrink-0"
               />
               {/* Content */}
@@ -303,7 +309,7 @@ export default function Home() {
                 </h3>
                 <p className="text-xs text-gray-600 leading-snug">
                   We present the top 10 titles for 2023 in fiction, non-fiction,
-                  and children's books, offering a glorious mix of masterful
+                  and children&apos;s books, offering a glorious mix of masterful
                   storytelling, compelling subject matter, and page-turning
                   delight.
                 </p>
@@ -313,20 +319,22 @@ export default function Home() {
             {/* News Item 2 */}
             <div className="flex items-start space-x-4 mb-10">
               {/* Image */}
-              <img
+              <Image
                 src="/Photo news2.png"
-                alt="February's Best Children's Books"
+                alt="February&apos;s Best Children&apos;s Books"
+                width={80}
+                height={112}
                 className="w-20 h-28 object-cover rounded-md flex-shrink-0"
               />
               {/* Content */}
               <div>
                 <h3 className="text-sm font-semibold text-gray-900 mb-2">
-                  February's Best Children's Books
+                  February&apos;s Best Children&apos;s Books
                 </h3>
                 <p className="text-xs text-gray-600 leading-snug">
-                  Some of the finest children's authors currently writing have
+                  Some of the finest children&apos;s authors currently writing have
                   books publishing this month. From Natasha Farrant to Elle
-                  McNicoll and from Tahereh Mafi to Harriet Muncaster, there's
+                  McNicoll and from Tahereh Mafi to Harriet Muncaster, there&apos;s
                   something for every young reader.
                 </p>
               </div>

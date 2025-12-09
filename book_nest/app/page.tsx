@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import { jwtDecode } from "jwt-decode"; // Import the library
+import Image from "next/image";
+import Link from "next/link";
 import Container from "@/components/layout/container";
 import Cookies from 'js-cookie';
 
@@ -9,16 +11,14 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 export default function Signin() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
     setErrorMessage("");
 
     try {
@@ -34,7 +34,7 @@ export default function Signin() {
         console.log("Token received:", data.token);
 
         // Decode the token to extract user details
-        const decodedToken: any = jwtDecode(data.token);
+        const decodedToken: { id: string; username?: string; email?: string; phoneNumber?: string; role?: string } = jwtDecode(data.token);
         console.log("Decoded token data:", decodedToken);
 
         // Save user details in cookies and localStorage
@@ -60,8 +60,6 @@ export default function Signin() {
     } catch (err) {
       console.error("Error during login:", err);
       setErrorMessage("An error occurred while logging in. Please try again.");
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -73,7 +71,7 @@ export default function Signin() {
           <div className="absolute bottom-0 right-0 mb-12">
             <h1 className="text-4xl font-semibold text-black mb-4">Sign In to</h1>
             <h2 className="text-6xl font-bold text-[#A7A3FF]">BOOK NEST</h2>
-            <img src="library.png" width={950} height={500} alt="Library" />
+            <Image src="/library.png" width={950} height={500} alt="Library" />
           </div>
         </div>
         <div className="flex flex-col justify-center items-center w-2/5 bg-white">
@@ -111,10 +109,10 @@ export default function Signin() {
               </button>
             </form>
             <p className="mt-4 text-gray-600 text-sm text-center">
-              Don't have an account?{" "}
-              <a href="/signup" className="text-purple-600 hover:underline">
+              Don&apos;t have an account?{" "}
+              <Link href="/signup" className="text-purple-600 hover:underline">
                 Register here!
-              </a>
+              </Link>
             </p>
           </div>
         </div>

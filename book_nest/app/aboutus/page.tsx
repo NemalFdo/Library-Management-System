@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 import Container from "@/components/layout/container";
 import Navigation from "@/components/layout/Nav";
 import Footer from "@/components/layout/footer";
@@ -17,17 +18,21 @@ const AboutUs = () => {
             <div className="flex flex-row space-x-8 mt-10">
               {/* First Image */}
               <div className="w-48 h-64 shadow-md">
-                <img
+                <Image
                   src="/image 2.png" // Relative path from the "public" folder
                   alt="The Hobbit"
+                  width={192}
+                  height={256}
                   className="w-full h-full object-cover rounded-lg border border-gray-200"
                 />
               </div>
               
               <div className="w-48 h-64 shadow-md relative top-40">
-                <img
+                <Image
                   src="/Image 17.png" // Relative path from the "public" folder
                   alt="Catching Fire"
+                  width={192}
+                  height={256}
                   className="w-full h-full object-cover rounded-lg border border-gray-200"
                 />
               </div>

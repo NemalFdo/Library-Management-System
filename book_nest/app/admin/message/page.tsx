@@ -1,8 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Container from "@/components/layout/container";
 import SideNav from "@/components/layout/AdminNav";
-import Footer from "@/components/layout/footer";
 
 const WS_URL = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:5000';
 
