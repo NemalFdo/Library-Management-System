@@ -4,6 +4,8 @@ import Container from "@/components/layout/container";
 import Navigation from "@/components/layout/Nav";
 import Footer from "@/components/layout/footer";
 
+const WS_URL = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:5000';
+
 const ContactUs = () => {
   const [userData, setUserData] = useState({
     username: "",
@@ -25,7 +27,7 @@ const ContactUs = () => {
     }
 
     // Create WebSocket connection
-    const newSocket = new WebSocket("ws://localhost:5000"); // Ensure this URL is correct
+    const newSocket = new WebSocket(WS_URL); // Ensure this URL is correct
     newSocket.onopen = () => {
       console.log("WebSocket connection established.");
     };

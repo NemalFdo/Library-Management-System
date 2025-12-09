@@ -4,6 +4,8 @@ import Navigation from "@/components/layout/Nav";
 import Footer from "@/components/layout/footer";
 import Container from "@/components/layout/container";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+
 
 interface Book {
   name: string;
@@ -69,7 +71,7 @@ export default function Cart() {
           .split("T")[0],
       }));
 
-      const response = await fetch("http://localhost:5000/api/books/borrowed-books", {
+      const response = await fetch(`${API_URL}/api/books/borrowed-books`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -110,7 +112,7 @@ export default function Cart() {
                   className="flex items-center justify-between mb-4 border-b pb-4"
                 >
                   <img
-                    src={item.image.startsWith("http") ? item.image : `http://localhost:5000${item.image}`}
+                    src={item.image.startsWith("http") ? item.image : `${API_URL}${item.image}`}
                     alt={item.name}
                     className="w-20 h-30 object-contain"
                   />

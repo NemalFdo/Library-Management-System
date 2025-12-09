@@ -5,6 +5,8 @@ import Navigation from "@/components/layout/Nav";
 import Cookies from "js-cookie";
 import Footer from "@/components/layout/footer";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+
 const AccountSettings = () => {
   const [userData, setUserData] = useState({
     username: "",
@@ -70,7 +72,7 @@ const AccountSettings = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/user/update", {
+      const response = await fetch(`${API_URL}/api/user/update`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

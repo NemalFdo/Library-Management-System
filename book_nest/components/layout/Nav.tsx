@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import debounce from "lodash.debounce";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+
 interface Book {
   name: string;
   description: string;
@@ -19,7 +21,7 @@ const LoginNavbar = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/books");
+        const response = await axios.get(`${API_URL}/api/books`);
         setBooks(response.data);
       } catch (error) {
         console.error("Error fetching books:", error);
@@ -42,7 +44,7 @@ const LoginNavbar = () => {
     }
 
     try {
-      const response = await axios.get(`http://localhost:5000/api/books/search?q=${query}`);
+      const response = await axios.get(`${API_URL}/api/books/search?q=${query}`);
       setSearchResults(response.data);
       setShowResults(true);
     } catch (error) {
@@ -101,7 +103,7 @@ const LoginNavbar = () => {
                       >
                         <div className="flex items-center">
                           <img
-                            src={`http://localhost:5000${book.image}`}
+                            src={`${API_URL}${book.image}`}
                             alt={book.name}
                             className="w-10 h-10 object-cover rounded-md mr-4"
                           />

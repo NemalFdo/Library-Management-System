@@ -2,6 +2,8 @@
 import { useState } from "react";
 import Container from "@/components/layout/container";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+
 export default function Signup() {
   const [formData, setFormData] = useState({
     email: "",
@@ -27,7 +29,7 @@ export default function Signup() {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/signup", {
+      const response = await fetch(`${API_URL}/api/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

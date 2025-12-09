@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import Footer from "@/components/layout/footer";
 import axios from "axios";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+
 // Define a type for your book objects
 interface Book {
   name: string;
@@ -22,7 +24,7 @@ export default function Home() {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/books");
+        const response = await axios.get(`${API_URL}/api/books`);
         setBooks(response.data);
       } catch (error) {
         console.error("Error fetching books:", error);
@@ -155,7 +157,7 @@ export default function Home() {
                 >
                   <div className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md h-full border border-gray-300">
                     <img
-                      src={`http://localhost:5000${item.image}`}
+                      src={`${API_URL}${item.image}`}
                       alt={item.name}
                       className="w-full object-contain h-40 rounded-md mb-4"
                     />
@@ -237,7 +239,7 @@ export default function Home() {
                 >
                   <div className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md h-full border border-gray-300">
                     <img
-                      src={`http://localhost:5000${item.image}`}
+                      src={`${API_URL}${item.image}`}
                       alt={item.name}
                       className="w-full object-contain h-40 rounded-md mb-4"
                     />

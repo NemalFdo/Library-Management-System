@@ -4,6 +4,8 @@ import SideNav from '@/components/layout/AdminNav';
 import Modal from '@/components/layout/Modal';
 import axios, { AxiosResponse } from 'axios';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+
 const BooksPage: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -15,7 +17,7 @@ const BooksPage: React.FC = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/books");
+        const response = await axios.get(`${API_URL}/api/books`);
         setBooks(response.data);
       } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -77,7 +79,7 @@ const BooksPage: React.FC = () => {
         const bookToEdit = books[currentBookIndex];
         const bookId = bookToEdit._id;
   
-        response = await axios.put(`http://localhost:5000/api/books/${bookId}`, formData, {
+        response = await axios.put(`${API_URL}/api/books/${bookId}`, formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
   
@@ -88,7 +90,7 @@ const BooksPage: React.FC = () => {
         );
       } else {
         // Add a new book
-        response = await axios.post("http://localhost:5000/api/books", formData, {
+        response = await axios.post(`${API_URL}/api/books`, formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
   
@@ -118,7 +120,7 @@ const BooksPage: React.FC = () => {
       const bookToDelete = books[index];
       const bookId = bookToDelete._id; // Get the book's MongoDB ID
 
-      const response = await axios.delete(`http://localhost:5000/api/books/${bookId}`);
+      const response = await axios.delete(`${API_URL}/api/books/${bookId}`);
       
       if (response.status === 200) {
         setBooks((prevBooks) => prevBooks.filter((_, i) => i !== index)); // Remove from the list
@@ -169,7 +171,7 @@ const BooksPage: React.FC = () => {
                   <td className="py-3 px-4">{book.description}</td>
                   <td className="py-3 px-4">
                     <img
-                      src={`http://localhost:5000${book.image}`}
+                      src={`${API_URL}${book.image}`}
                       alt={book.name}
                       className="h-16 w-16 object-cover"
                     />

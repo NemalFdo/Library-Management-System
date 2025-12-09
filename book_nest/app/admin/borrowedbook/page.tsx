@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import SideNav from "@/components/layout/AdminNav";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+
 interface BorrowedBook {
   id: string; // MongoDB _id will be mapped to id
   name: string;
@@ -19,7 +21,7 @@ const BorrowedBooks = () => {
   useEffect(() => {
     const fetchBorrowedBooks = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/books/borrowed-books");
+        const response = await fetch(`${API_URL}/api/books/borrowed-books`);
         if (response.ok) {
           const data = await response.json();
           console.log("Fetched borrowed books:", data); // Add this line to log the response
@@ -38,7 +40,7 @@ const BorrowedBooks = () => {
   const handleDelete = async (id: string) => {
     console.log("Deleting book with ID:", id);  // Check if ID is correct
     try {
-      const response = await fetch(`http://localhost:5000/api/books/borrowed-books/${id}`, {
+      const response = await fetch(`${API_URL}/api/books/borrowed-books/${id}`, {
         method: "DELETE",
       });
   
@@ -57,7 +59,7 @@ const BorrowedBooks = () => {
   const handleEditSave = async () => {
     if (editData) {
       try {
-        const response = await fetch(`http://localhost:5000/api/books/borrowed-books/${editData.id}`, {
+        const response = await fetch(`${API_URL}/api/books/borrowed-books/${editData.id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -83,7 +85,7 @@ const BorrowedBooks = () => {
   const handleAddBook = async () => {
     if (newBook) {
       try {
-        const response = await fetch("http://localhost:5000/api/books/borrowed-books", {
+        const response = await fetch(`${API_URL}/api/books/borrowed-books`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

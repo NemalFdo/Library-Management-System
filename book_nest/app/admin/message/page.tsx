@@ -4,6 +4,8 @@ import Container from "@/components/layout/container";
 import SideNav from "@/components/layout/AdminNav";
 import Footer from "@/components/layout/footer";
 
+const WS_URL = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:5000';
+
 const AdminMessages = () => {
   const [messages, setMessages] = useState<string[]>([]);
   const [reply, setReply] = useState<string>("");
@@ -12,7 +14,7 @@ const AdminMessages = () => {
 
   useEffect(() => {
     // Establish a WebSocket connection
-    const newSocket = new WebSocket("ws://localhost:5000"); // Ensure this URL is correct
+    const newSocket = new WebSocket(WS_URL); // Ensure this URL is correct
 
     newSocket.onopen = () => {
       console.log("Admin WebSocket connection established.");
